@@ -1,88 +1,90 @@
 package com.example.neexndayjor.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.neexndayjor.R;
+import com.example.neexndayjor.auth.LoginActivity;
 
 public class ProfileFragment extends Fragment {
 
-    // Step 1: Declare UI components
-    private ImageView profileImage;
     private TextView userNameTextView, userEmailTextView, userPhoneTextView;
-    private Button editProfileButton, logoutButton;
+    private TextView btnOrders, btnSettings, btnHelp, btnCredits, btnLoyaltyCards, btnFamily, logoutButton;
 
     public ProfileFragment() {
-        // Required empty constructor
+        // Required empty public constructor
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-        // Step 2: Inflate layout
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Step 3: Link XML views using findViewById
-        profileImage = view.findViewById(R.id.profileImage);
+        // Initialize profile information
         userNameTextView = view.findViewById(R.id.userNameTextView);
         userEmailTextView = view.findViewById(R.id.userEmailTextView);
         userPhoneTextView = view.findViewById(R.id.userPhoneTextView);
-        editProfileButton = view.findViewById(R.id.editProfileButton);
+
+        // Initialize section links
+        btnOrders = view.findViewById(R.id.btnOrders);
+        btnSettings = view.findViewById(R.id.btnSettings);
+        btnHelp = view.findViewById(R.id.btnHelp);
+        btnCredits = view.findViewById(R.id.btnCredits);
+        btnLoyaltyCards = view.findViewById(R.id.btnLoyaltyCards);
+        btnFamily = view.findViewById(R.id.btnFamily);
         logoutButton = view.findViewById(R.id.logoutButton);
 
-        // Step 4: Simulate dynamic user data
-        // You can later fetch this from SharedPreferences or Firebase
-        User currentUser = getUser();
-
-        userNameTextView.setText(currentUser.getName());
-        userEmailTextView.setText(currentUser.getEmail());
-        userPhoneTextView.setText(currentUser.getPhone());
-        profileImage.setImageResource(R.drawable.ic_profile_placeholder); // default profile image
-
-        // Step 5: Button click listeners
-        editProfileButton.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Edit Profile clicked!", Toast.LENGTH_SHORT).show());
-
-        logoutButton.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Logging out...", Toast.LENGTH_SHORT).show());
+        // Set click listeners
+        btnOrders.setOnClickListener(v -> openOrders());
+        btnSettings.setOnClickListener(v -> openSettings());
+        btnHelp.setOnClickListener(v -> openHelp());
+        btnCredits.setOnClickListener(v -> openCredits());
+        btnLoyaltyCards.setOnClickListener(v -> openLoyaltyCards());
+        btnFamily.setOnClickListener(v -> openFamily());
+        logoutButton.setOnClickListener(v -> signOut());
 
         return view;
     }
 
-    // Step 6: Temporary mock user
-    private User getUser() {
-        return new User(
-                "Aminata Sall",
-                "aminata@example.com",
-                "+1 929 227 1511"
-        );
+    private void openOrders() {
+        Toast.makeText(getActivity(), "Opening Orders...", Toast.LENGTH_SHORT).show();
     }
 
-    // Step 7: Local User class (replace with Firebase later)
-    private static class User {
-        private final String name, email, phone;
+    private void openSettings() {
+        Toast.makeText(getActivity(), "Opening Settings...", Toast.LENGTH_SHORT).show();
+    }
 
-        public User(String name, String email, String phone) {
-            this.name = name;
-            this.email = email;
-            this.phone = phone;
-        }
+    private void openHelp() {
+        Toast.makeText(getActivity(), "Opening Help...", Toast.LENGTH_SHORT).show();
+    }
 
-        public String getName() { return name; }
-        public String getEmail() { return email; }
-        public String getPhone() { return phone; }
+    private void openCredits() {
+        Toast.makeText(getActivity(), "Opening Credits, Promos, and Gift Cards...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openLoyaltyCards() {
+        Toast.makeText(getActivity(), "Opening Add Loyalty Cards...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openFamily() {
+        Toast.makeText(getActivity(), "Opening Family...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void signOut() {
+        // Example: Clear user session if you have login system
+        // If using Firebase: FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+
+        Toast.makeText(getActivity(), "Signed out successfully", Toast.LENGTH_SHORT).show();
     }
 }

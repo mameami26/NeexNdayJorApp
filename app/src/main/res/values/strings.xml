@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NeexNdayJor</string>
+    <string name="orders">Orders</string>
+    <string name="log_out">Log Out</string>
+    <string name="family">Family</string>
+    <string name="add_loyalty_cards">Add loyalty cards</string>
+    <string name="credits_promos_and_gift_cards">Credits, promos, and gift cards</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
 </resources>
